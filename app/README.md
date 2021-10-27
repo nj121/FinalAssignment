@@ -1,0 +1,15 @@
+#姓名
+牛杰
+#学号
+41810069
+#项目名称
+移动技术与开发期末大作业
+#项目描述
+本项目实现一个查看新闻的APP，新闻资源来自人民网（http://finance.people.com.cn）。
+获取首页滚动栏、经济栏、科技栏、生态栏的新闻标题、摘要，共获取9页，经过处理在APP首页以列表方式展示。
+同时获取详细内容的链接，在列表点击事件处理中传递给显示新闻内容详情的页面以便获取内容。
+本APP主要有三个页面，MainActivity（主页面，展示滚动栏的新闻）、GrossActivity（展示经济、科技、生态三个分类的新闻）、moreinfo（显示新闻内容详情）。
+GrossActivity采用ViewPaper框架实现，三个Fragment分别展示三个分类的新闻页面。
+#项目执行流程
+MainActivity-->GrossActivity（MainActivity右上角菜单项点选新闻分类进入）。
+这两个Activity都用列表方式展示新闻标题及摘要，列表设置了点击事件进入moreinfo页面展示新闻内容详情。

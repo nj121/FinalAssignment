@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,6 +23,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
             @Override
             public void handleMessage(@NonNull Message msg) {
                 Log.i(TAG, "handleMessage: ok");
-                if(msg.what == 1){
+                if(msg.what == 0){
                     list = (ArrayList<HashMap<String,String>>)msg.obj;
                     myAdapter = new MyAdapter(MainActivity.this,R.layout.list_item,list);
                     first_list.setAdapter(myAdapter);
@@ -60,6 +63,24 @@ public class MainActivity extends AppCompatActivity implements Runnable,
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.jump){
+            Log.i(TAG, "menu: ");
+            Intent jump = new Intent(this,GrossActivity.class);
+            Log.i(TAG, "menu:ok");
+
+            startActivityForResult(jump,10);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void run() {
             Document doc = null;
             Message msg;
@@ -67,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
                 ArrayList<HashMap<String,String>> listItem = new ArrayList<HashMap<String,String>>();
                 for(int i = 1;i<9;i++){
                     doc = Jsoup.connect("http://finance.people.com.cn/index"+i+".html#fy01").get();
-                    Log.i(TAG, "title: "+doc.title());
+//                    Log.i(TAG, "title: "+doc.title());
                     Elements doc_select= doc.select("div.headingNews").first()
                             .select("div.on");
                     Elements news_title= doc_select.select("h5");
@@ -80,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
                         listItem.add(map);
                     }
                 }
-                sendMessage(listItem,1);
+                sendMessage(listItem,0);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -100,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
         Intent first = new Intent(this,moreinfo.class);
         first.putExtra("attr",map.get("attr"));
         first.putExtra("title",map.get("title"));
+        first.putExtra("attr1","finance");
         startActivityForResult(first,1);
     }
 
@@ -107,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id) {
         Log.i(TAG, "onItemLongClick: yes");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示").setMessage("请确认是否删除当前数据").setPositiveButton("是",new DialogInterface.OnClickListener(){
+        builder.setTitle("提示").setMessage("请确认是否屏蔽当前新闻").setPositiveButton("是",new DialogInterface.OnClickListener(){
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -117,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements Runnable,
             }
         }).setNegativeButton("否",null);
         builder.create().show();
-
         return true;
     }
 }
