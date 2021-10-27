@@ -24,7 +24,8 @@ public class moreinfo extends AppCompatActivity implements Runnable{
 
     private static final String TAG = "mmm";
     Handler handler;
-    TextView tt;
+    TextView mm,tt;
+    Intent in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,8 @@ public class moreinfo extends AppCompatActivity implements Runnable{
 
         Thread get = new Thread(this);
         get.start();
-        tt = findViewById(R.id.moreinfo);
+        mm = findViewById(R.id.moreinfo);
+        tt = findViewById(R.id.titleinfo);
         handler = new Handler(Looper.myLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -43,32 +45,41 @@ public class moreinfo extends AppCompatActivity implements Runnable{
                 }
                 super.handleMessage(msg);
                 Log.i(TAG, "onCreate: "+mi);
-                tt.setText(mi);
+                mm.setText(mi);
             }
         };
+        in = getIntent();
+        String title = in.getStringExtra("title");
+        Log.i(TAG, "onCreate: "+title);
+        tt.setText(title);
     }
 
     @Override
     public void run() {
         Document doc = null;
         try {
-            Intent in = getIntent();
+            in = getIntent();
             String attr = in.getStringExtra("attr");
             ArrayList<HashMap<String,String>> listItem = new ArrayList<HashMap<String,String>>();
             doc = Jsoup.connect("http://finance.people.com.cn/"+attr).get();
             Log.i(TAG, "title: "+doc.title());
             Elements doc_select= doc.select("div.rm_txt_con").select("p");
             String mo = "";
+            doc_select.remove(doc_select.size()-1);
             for(Element ds : doc_select){
                 mo += "\t\t\t"+ds.text()+"\n";
             }
-            Message msg;
-            msg = handler.obtainMessage(1);
-            msg.obj = mo;
-            handler.sendMessage(msg);
-            Log.i(TAG, "run: ok"+1);
+            sendMessage(mo,1);
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+
+    public void sendMessage(String td,int mid){
+        Message msg;
+        msg = handler.obtainMessage(mid);
+        msg.obj = td;
+        handler.sendMessage(msg);
+        Log.i(TAG, "run: ok"+mid);
     }
 }

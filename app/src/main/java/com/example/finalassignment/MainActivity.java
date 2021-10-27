@@ -97,10 +97,9 @@ public class MainActivity extends AppCompatActivity implements Runnable,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object itemAtPosition = first_list.getItemAtPosition(position);
         HashMap<String,String> map = (HashMap<String,String>) itemAtPosition;
-        String attr = map.get("attr");
-        Log.i(TAG, "attr = "+attr);
         Intent first = new Intent(this,moreinfo.class);
-        first.putExtra("attr",attr);
+        first.putExtra("attr",map.get("attr"));
+        first.putExtra("title",map.get("title"));
         startActivityForResult(first,1);
     }
 
