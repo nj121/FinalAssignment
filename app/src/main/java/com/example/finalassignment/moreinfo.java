@@ -48,6 +48,7 @@ public class moreinfo extends AppCompatActivity implements Runnable{
                 mm.setText(mi);
             }
         };
+
         in = getIntent();
         String title = in.getStringExtra("title");
         Log.i(TAG, "onCreate: "+title);
@@ -60,8 +61,9 @@ public class moreinfo extends AppCompatActivity implements Runnable{
         try {
             in = getIntent();
             String attr = in.getStringExtra("attr");
+            String attr1 = in.getStringExtra("attr1");
             ArrayList<HashMap<String,String>> listItem = new ArrayList<HashMap<String,String>>();
-            doc = Jsoup.connect("http://finance.people.com.cn/"+attr).get();
+            doc = Jsoup.connect("http://"+attr1+".people.com.cn/"+attr).get();
             Log.i(TAG, "title: "+doc.title());
             Elements doc_select= doc.select("div.rm_txt_con").select("p");
             String mo = "";

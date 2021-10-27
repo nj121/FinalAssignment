@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FinalAssignment"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".GrossActivity"
+            android:exported="true" />
+        <activity
             android:name=".moreinfo"
             android:exported="true" />
         <activity

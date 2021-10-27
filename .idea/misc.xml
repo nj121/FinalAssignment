@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/activity_gross.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/activity_moreinfo.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/fragment_first.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/fragment_second.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/fragment_third.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/destiny/AndroidStudioProjects/FinalAssignment/app/src/main/res/layout/list_item.xml" value="0.25885416666666666" />
       </map>
     </option>
