@@ -16,7 +16,7 @@
             android:name=".GrossActivity"
             android:exported="true" />
         <activity
-            android:name=".moreinfo"
+            android:name=".MoreInfo"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

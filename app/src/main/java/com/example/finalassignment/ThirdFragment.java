@@ -1,15 +1,12 @@
 package com.example.finalassignment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -37,7 +33,7 @@ public class ThirdFragment extends Fragment implements Runnable,
     private static final String TAG = "ttt";
     Handler handler;
     ListView third_list;
-    MyAdapter myAdapter;
+    MyListAdapter myListAdapter;
     ArrayList<HashMap<String,String>> list;
 
     public ThirdFragment() {
@@ -58,8 +54,8 @@ public class ThirdFragment extends Fragment implements Runnable,
                 Log.i(TAG, "handleMessage: ok");
                 if(msg.what == 3){
                     list = (ArrayList<HashMap<String,String>>)msg.obj;
-                    myAdapter = new MyAdapter(ThirdFragment.this.getContext(),R.layout.list_item,list);
-                    third_list.setAdapter(myAdapter);
+                    myListAdapter = new MyListAdapter(ThirdFragment.this.getContext(),R.layout.list_item,list);
+                    third_list.setAdapter(myListAdapter);
                     third_list.setEmptyView(view.findViewById(R.id.nodata));
 
                 }
@@ -114,7 +110,7 @@ public class ThirdFragment extends Fragment implements Runnable,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object itemAtPosition = third_list.getItemAtPosition(position);
         HashMap<String,String> map = (HashMap<String,String>) itemAtPosition;
-        Intent third = new Intent(ThirdFragment.this.getContext(),moreinfo.class);
+        Intent third = new Intent(ThirdFragment.this.getContext(), MoreInfo.class);
         third.putExtra("attr",map.get("attr"));
         third.putExtra("title",map.get("title"));
         third.putExtra("attr1","env");
@@ -131,7 +127,7 @@ public class ThirdFragment extends Fragment implements Runnable,
             public void onClick(DialogInterface dialog, int which) {
                 Log.i(TAG, "onClick: 对话框事件处理");
                 list.remove(position);
-                myAdapter.notifyDataSetChanged();
+                myListAdapter.notifyDataSetChanged();
             }
         }).setNegativeButton("否",null);
         builder.create().show();

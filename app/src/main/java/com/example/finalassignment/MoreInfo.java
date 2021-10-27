@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class moreinfo extends AppCompatActivity implements Runnable{
+public class MoreInfo extends AppCompatActivity implements Runnable{
 
     private static final String TAG = "mmm";
     Handler handler;

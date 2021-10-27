@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyAdapter extends ArrayAdapter {
+public class MyListAdapter extends ArrayAdapter {
     private static final String TAG = "rrr";
 
-    public MyAdapter(@NonNull Context context, int resource, ArrayList<HashMap<String,String>> list) {
+    public MyListAdapter(@NonNull Context context, int resource, ArrayList<HashMap<String,String>> list) {
         super(context, resource,list);
     }
 

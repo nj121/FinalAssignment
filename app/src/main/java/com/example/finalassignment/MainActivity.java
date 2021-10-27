@@ -23,7 +23,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
     private static final String TAG = "rrr";
     Handler handler;
     ListView first_list;
-    MyAdapter myAdapter;
+    MyListAdapter myListAdapter;
     ArrayList<HashMap<String,String>> list;
 
     @Override
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements Runnable,
                 Log.i(TAG, "handleMessage: ok");
                 if(msg.what == 0){
                     list = (ArrayList<HashMap<String,String>>)msg.obj;
-                    myAdapter = new MyAdapter(MainActivity.this,R.layout.list_item,list);
-                    first_list.setAdapter(myAdapter);
+                    myListAdapter = new MyListAdapter(MainActivity.this,R.layout.list_item,list);
+                    first_list.setAdapter(myListAdapter);
                     first_list.setEmptyView(findViewById(R.id.nodata));
 
                 }
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object itemAtPosition = first_list.getItemAtPosition(position);
         HashMap<String,String> map = (HashMap<String,String>) itemAtPosition;
-        Intent first = new Intent(this,moreinfo.class);
+        Intent first = new Intent(this, MoreInfo.class);
         first.putExtra("attr",map.get("attr"));
         first.putExtra("title",map.get("title"));
         first.putExtra("attr1","finance");
@@ -135,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements Runnable,
             public void onClick(DialogInterface dialog, int which) {
                 Log.i(TAG, "onClick: 对话框事件处理");
                 list.remove(position);
-                myAdapter.notifyDataSetChanged();
+                myListAdapter.notifyDataSetChanged();
             }
         }).setNegativeButton("否",null);
         builder.create().show();
