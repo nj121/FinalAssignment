@@ -25,6 +25,14 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/sourceinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/moreinfo"
